@@ -5,6 +5,7 @@ import (
 	"bucheng.first/dao/impl"
 	"bucheng.first/entity"
 	"bucheng.first/utils"
+	"fmt"
 	"github.com/jinzhu/gorm"
 )
 
@@ -43,8 +44,17 @@ func (userService UserServiceImpl) ListAll() []entity.User {
 }
 
 func (userService UserServiceImpl) SaveUserAndRoom() int {
+	var tx *gorm.DB
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println(err)
+			if tx != nil {
+				tx.Rollback()
+			}
+		}
+	}()
 	//开启是否
-	tx := userService.db.Begin()
+	tx = userService.db.Begin()
 	user := entity.User{
 		Name:   "yinchong10",
 		Age:    30,
