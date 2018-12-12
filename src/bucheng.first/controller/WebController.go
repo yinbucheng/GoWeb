@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"bucheng.first/vo"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )
@@ -23,9 +24,10 @@ func (controller WebController) helloWord(c *gin.Context) {
 	age := c.Query("age")
 	address := c.DefaultQuery("address", "")
 	fmt.Println("name:", name, "age:"+age, "address:", address)
-	c.JSON(200, gin.H{
-		"status": 200,
-		"error":  "success",
-		"data":   nil,
-	})
+	//c.JSON(200, gin.H{
+	//	"status": 200,
+	//	"error":  "success",
+	//	"data":   nil,
+	//})
+	vo.FailServerResult("fail to invoke method", c)
 }
