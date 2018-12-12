@@ -16,8 +16,7 @@ func main() {
 	entity.CreateTable(db, entity.Room{})
 	fmt.Println("================初始化表完成====================")
 	engine := gin.Default()
-	controller := new(controller2.WebController)
-	controller.HelloWord(engine)
+	controller2.InitWebController(engine)
 	controller2.NewUserController(engine)
 	engine.Run(":9999")
 }
