@@ -38,7 +38,7 @@ func PostJson(url string, req string) string {
 	return string(body)
 }
 
-func GetByHead(url string, heads map[string]string) string {
+func GetWithHead(url string, heads map[string]string) string {
 	client := &http.Client{}
 	request, err := http.NewRequest("GET", url, nil)
 	if err != nil {
