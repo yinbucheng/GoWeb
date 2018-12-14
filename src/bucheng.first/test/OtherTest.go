@@ -10,6 +10,109 @@ func main() {
 	//testWrite()
 	//testRead()
 	//writeMap()
+	//testReadMap()
+
+	testTree()
+	//var content *string
+	//InitContent(content)
+	//fmt.Println(content)
+}
+
+func InitContent(content *string) {
+	*content = "nice"
+}
+
+func testTree() {
+	var root BinaryTree
+	root = BinaryTree{
+		data: 55,
+	}
+	AddBinaryTreeNode(&root, 40)
+	AddBinaryTreeNode(&root, 10)
+	AddBinaryTreeNode(&root, 2)
+	AddBinaryTreeNode(&root, 35)
+	AddBinaryTreeNode(&root, 78)
+	AddBinaryTreeNode(&root, 20)
+	AddBinaryTreeNode(&root, 100)
+	FirstPrintTree(&root)
+	fmt.Println()
+	BackPrintTree(&root)
+	fmt.Println()
+	MidlePrintTree(&root)
+}
+
+type BinaryTree struct {
+	data  int
+	prev  *BinaryTree
+	left  *BinaryTree
+	right *BinaryTree
+}
+
+func AddBinaryTreeNode(node *BinaryTree, data int) {
+	if node == nil {
+		node = &BinaryTree{
+			data: data,
+		}
+		return
+	}
+	temp := node
+	for {
+		if data > temp.data {
+			if temp.right != nil {
+				temp = temp.right
+			} else {
+				temp.right = &BinaryTree{
+					data: data,
+					prev: temp,
+				}
+				return
+			}
+		}
+		if data == temp.data {
+			panic("data exist in tree")
+		}
+		if data < temp.data {
+			if temp.left != nil {
+				temp = temp.left
+			} else {
+				temp.left = &BinaryTree{
+					data: data,
+					prev: temp,
+				}
+				return
+			}
+		}
+	}
+}
+
+func FirstPrintTree(node *BinaryTree) {
+	if node == nil {
+		return
+	}
+	FirstPrintTree(node.left)
+	fmt.Print(" ", node.data)
+	FirstPrintTree(node.right)
+}
+
+func MidlePrintTree(node *BinaryTree) {
+	if node == nil {
+		return
+	}
+	fmt.Print(" ", node.data)
+	MidlePrintTree(node.left)
+	MidlePrintTree(node.right)
+}
+
+func BackPrintTree(node *BinaryTree) {
+	if node == nil {
+		return
+	}
+	BackPrintTree(node.right)
+	fmt.Print(" ", node.data)
+	BackPrintTree(node.left)
+}
+
+func testReadMap() {
 	data := utils.ReadMap("testfile//map.txt")
 	fmt.Println(data)
 }
