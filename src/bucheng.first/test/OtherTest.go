@@ -16,9 +16,9 @@ func main() {
 
 func writeMap() {
 	data := make(map[string]string)
-	data["name"] = "yinchong"
-	data["age"] = "20"
-	data["address"] = "wuhai"
+	data["name2"] = "yinchong"
+	data["age2"] = "20"
+	data["address2"] = "wuhai"
 	flag := utils.WriteMap("testfile//map.txt", data)
 	fmt.Println(flag)
 }

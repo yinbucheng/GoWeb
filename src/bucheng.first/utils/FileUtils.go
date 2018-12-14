@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"strings"
 )
 
@@ -17,11 +18,22 @@ func FileReadText(name string) string {
 
 func FileWriteText(name string, content string) bool {
 	data := []byte(content)
-	err := ioutil.WriteFile(name, data, 0644)
-	if err != nil {
-		return false
+	if !isFileExist(name) {
+		err := ioutil.WriteFile(name, data, 0644)
+		if err != nil {
+			return false
+		}
+		return true
+	} else {
+		f, err := os.OpenFile(name, os.O_WRONLY|os.O_APPEND, 0644)
+		if err != nil {
+			fmt.Println("WRITE file fail:", err)
+			return false
+		}
+		defer f.Close()
+		f.Write(data)
+		return true
 	}
-	return true
 }
 
 func WriteMap(name string, data map[string]string) bool {
@@ -58,4 +70,11 @@ func ReadMap(name string) map[string]string {
 		properties[temp2[0]] = temp2[1]
 	}
 	return properties
+}
+
+func isFileExist(name string) bool {
+	if _, err := os.Stat(name); os.IsNotExist(err) {
+		return false
+	}
+	return true
 }
