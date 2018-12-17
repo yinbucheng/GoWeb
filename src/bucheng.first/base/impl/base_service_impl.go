@@ -52,3 +52,19 @@ func (service BaseServiceImpl) ListAll(bean interface{}) {
 		logrus.Error(err)
 	}
 }
+
+func (service BaseServiceImpl) ExecuteOnAffair(method func(param ...interface{}), param ...interface{}) {
+	tx := service.Db.Begin()
+	defer func() {
+		if r := recover(); r != nil {
+			if _, ok := r.(error); ok {
+				logrus.Error(ok)
+				tx.Rollback()
+			} else {
+				tx.Commit()
+			}
+		}
+	}()
+	//这里需要执行事务的方法最后的参数为*gorm.DB类型
+	method(param, tx)
+}

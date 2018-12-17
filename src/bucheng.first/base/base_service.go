@@ -6,4 +6,6 @@ type BaseService interface {
 	Update(id int, bean interface{}) int
 	FindOne(id int, bean interface{})
 	ListAll(bean interface{})
+	//开启事务执行此方法
+	ExecuteOnAffair(method func(param ...interface{}), param ...interface{})
 }
