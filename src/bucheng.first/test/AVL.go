@@ -215,6 +215,7 @@ func main() {
 	newTree = bsTree.Insert(110)
 	newTree = bsTree.Insert(130)
 	newTree = bsTree.Insert(105)
+	newTree = bsTree.Insert(20)
 	fmt.Println(newTree.getAll())
 
 	newTree.Delete(110)

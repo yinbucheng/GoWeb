@@ -9,8 +9,16 @@
     <mapping directory="$PROJECT_DIR$/src/github.com/golang/protobuf" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/github.com/jinzhu/gorm" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/github.com/jinzhu/inflection" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/konsorten/go-windows-terminal-sequences" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/lestrrat/go-file-rotatelogs" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/lestrrat/go-strftime" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/github.com/mattn/go-isatty" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/pkg/errors" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/rifflock/lfshook" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/sirupsen/logrus" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/github.com/ugorji/go" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/golang.org/x/crypto" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/golang/org/x/crypto" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/gopkg.in/gin-gonic/gin.v1" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/gopkg.in/go-playground/validator.v8" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/gopkg.in/yaml.v2" vcs="Git" />

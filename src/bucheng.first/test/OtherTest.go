@@ -2,21 +2,87 @@ package main
 
 import (
 	"bucheng.first/utils"
+	"bytes"
 	"fmt"
+	. "golang.org/x/crypto/ssh"
+	"log"
+	"net"
 )
 
 func main() {
-	//test1()
-	//testWrite()
-	//testRead()
-	//writeMap()
-	//testReadMap()
 
-	testTree()
-	//var content *string
-	//InitContent(content)
-	//fmt.Println(content)
+	var stdOut, stdErr bytes.Buffer
+
+	session, err := SSHConnect("intellif", "introcks", "192.168.11.30", 22)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer session.Close()
+
+	session.Stdout = &stdOut
+	session.Stderr = &stdErr
+
+	err = session.Run(" cat /root/test.txt")
+	if err != nil {
+		fmt.Println(stdErr.String())
+		panic(err)
+	}
+
+	fmt.Println(stdOut.String())
+
 }
+
+func SSHConnect(user, password, host string, port int) (*Session, error) {
+	var (
+		auth         []AuthMethod
+		addr         string
+		clientConfig *ClientConfig
+		client       *Client
+		session      *Session
+		err          error
+	)
+	// get auth method
+	auth = make([]AuthMethod, 0)
+	auth = append(auth, Password(password))
+
+	hostKeyCallbk := func(hostname string, remote net.Addr, key PublicKey) error {
+		return nil
+	}
+
+	clientConfig = &ClientConfig{
+		User: user,
+		Auth: auth,
+		// Timeout:             30 * time.Second,
+		HostKeyCallback: hostKeyCallbk,
+	}
+
+	// connet to ssh
+	addr = fmt.Sprintf("%s:%d", host, port)
+
+	if client, err = Dial("tcp", addr, clientConfig); err != nil {
+		return nil, err
+	}
+
+	// create session
+	if session, err = client.NewSession(); err != nil {
+		return nil, err
+	}
+
+	return session, nil
+}
+
+//func main() {
+//	//test1()
+//	//testWrite()
+//	//testRead()
+//	//writeMap()
+//	//testReadMap()
+//
+//	testTree()
+//	//var content *string
+//	//InitContent(content)
+//	//fmt.Println(content)
+//}
 
 func InitContent(content *string) {
 	*content = "nice"
