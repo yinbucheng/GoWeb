@@ -26,10 +26,10 @@ func InitController(engine *gin.Engine) {
 	engine.POST("/user/affairTest", userController.affairTest)
 }
 
-func (userController UserController) saveUser(c *gin.Context) {
+func (controller UserController) saveUser(c *gin.Context) {
 	var user entity.User
 	c.BindJSON(&user)
-	code := userController.userService.Save(&user)
+	code := controller.userService.Save(&user)
 	if code != -1 {
 		base.Success(c)
 	} else {
@@ -37,10 +37,10 @@ func (userController UserController) saveUser(c *gin.Context) {
 	}
 }
 
-func (userController UserController) deleteUser(c *gin.Context) {
+func (controller UserController) deleteUser(c *gin.Context) {
 	var user entity.User
 	c.BindJSON(&user)
-	result := userController.userService.Delete(user.ID, &user)
+	result := controller.userService.Delete(user.ID, &user)
 	if result >= 0 {
 		base.Success(c)
 	} else {
@@ -48,30 +48,26 @@ func (userController UserController) deleteUser(c *gin.Context) {
 	}
 }
 
-func (userController UserController) listAll(c *gin.Context) {
+func (controller UserController) listAll(c *gin.Context) {
 	var users []entity.User
-	userController.userService.ListAll(&users)
+	controller.userService.ListAll(&users)
 	base.SuccessWithData(users, c)
 }
 
-func (userController UserController) findOne(c *gin.Context) {
+func (controller UserController) findOne(c *gin.Context) {
 	id, err := strconv.Atoi(c.Query("id"))
 	if err != nil {
 		fmt.Println("Error:", err)
 	}
 	var user entity.User
-	userController.userService.FindOne(id, &user)
+	controller.userService.FindOne(id, &user)
 	base.SuccessWithData(user, c)
 }
 
-func (userController UserController) UpdateUser(engine *gin.Engine) {
-	engine.POST("/user/update", userController.updateUser)
-}
-
-func (userController UserController) updateUser(c *gin.Context) {
+func (controller UserController) updateUser(c *gin.Context) {
 	var user entity.User
 	c.BindJSON(&user)
-	result := userController.userService.Update(user.ID, &user)
+	result := controller.userService.Update(user.ID, &user)
 	if result >= 0 {
 		base.Success(c)
 	} else {
