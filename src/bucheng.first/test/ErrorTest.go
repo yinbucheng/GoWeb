@@ -9,6 +9,9 @@ func main() {
 		}
 	}()
 	f()
+	func() {
+		fmt.Println("error....2")
+	}()
 }
 
 func f() {

@@ -85,6 +85,11 @@ func (controller UserController) findAll(c *gin.Context) {
 }
 
 func (controller UserController) affairTest(c *gin.Context) {
-	controller.userService.AffairTest()
-	base.Success(c)
+	err := controller.userService.AffairTest()
+	fmt.Println(err)
+	if err != nil {
+		base.Fail(err.Error(), c)
+	} else {
+		base.Success(c)
+	}
 }
