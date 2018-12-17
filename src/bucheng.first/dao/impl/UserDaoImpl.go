@@ -11,8 +11,8 @@ type UserDaoImpl struct {
 
 func (userDao UserDaoImpl) Save(user *entity.User, db *gorm.DB) int {
 	err := db.Create(user).Error
-	fmt.Println(err)
 	if err != nil {
+		fmt.Println(err)
 		return -1
 	}
 	return 0
@@ -27,7 +27,7 @@ func (userDao UserDaoImpl) Delete(user *entity.User, db *gorm.DB) int {
 }
 
 func (userDao UserDaoImpl) Update(user *entity.User, db *gorm.DB) int {
-	err := db.Model(user).Update("name", user.Name).Error
+	err := db.Model(user).Where("id=?", user.ID).Update(user).Error
 	if err != nil {
 		return -1
 	}
