@@ -12,11 +12,6 @@ type BaseServiceImpl struct {
 	Db  *gorm.DB
 }
 
-func (service BaseServiceImpl) InitAttriute(dao base.BaseDao, db *gorm.DB) {
-	service.Dao = dao
-	service.Db = db
-}
-
 func (service BaseServiceImpl) Save(bean interface{}) int {
 	err := service.Dao.Save(bean, service.Db)
 	if err != nil {
