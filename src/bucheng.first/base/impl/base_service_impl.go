@@ -57,7 +57,6 @@ func (service BaseServiceImpl) ListAll(bean interface{}) {
 func (service BaseServiceImpl) ExecuteOnAffair(method func(params ...interface{}), param ...interface{}) {
 	tx := service.Db.Begin()
 	defer func() {
-		fmt.Println("defer first invoke")
 		if r := recover(); r != nil {
 			logrus.Error(r)
 			fmt.Errorf("%v", r)
