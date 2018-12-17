@@ -20,6 +20,7 @@ func (service BaseServiceImpl) Save(bean interface{}) int {
 	}
 	return 1
 }
+
 func (service BaseServiceImpl) Delete(id int, bean interface{}) int {
 	err := service.Dao.Delete(id, bean, service.Db)
 	if err != nil {
