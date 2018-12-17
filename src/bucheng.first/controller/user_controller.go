@@ -23,6 +23,7 @@ func InitController(engine *gin.Engine) {
 	engine.GET("/user/findOne", userController.findOne)
 	engine.POST("/user/update", userController.updateUser)
 	engine.POST("/user/findAll", userController.findAll)
+	engine.POST("/user/affairTest", userController.affairTest)
 }
 
 func (userController UserController) saveUser(c *gin.Context) {
@@ -81,4 +82,9 @@ func (userController UserController) updateUser(c *gin.Context) {
 func (controller UserController) findAll(c *gin.Context) {
 	users := controller.userService.FindAll()
 	base.SuccessWithData(users, c)
+}
+
+func (controller UserController) affairTest(c *gin.Context) {
+	controller.userService.AffairTest()
+	base.Success(c)
 }
