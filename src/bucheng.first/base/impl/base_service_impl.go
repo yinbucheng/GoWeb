@@ -54,6 +54,7 @@ func (service BaseServiceImpl) ListAll(bean interface{}) {
 	}
 }
 
+//这里返回很有意思它通过参数加类型 然后在defer中赋值err就可以了
 func (service BaseServiceImpl) ExecuteOnAffair(method func(params ...interface{}), param ...interface{}) (err error) {
 	tx := service.Db.Begin()
 	defer func() {
