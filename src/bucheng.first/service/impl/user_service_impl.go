@@ -30,8 +30,8 @@ func (service UserServiceImpl) FindAll() []user.User {
 	return daoImpl.FindAll(service.Db)
 }
 
-func (service UserServiceImpl) AffairTest() {
-	service.ExecuteOnAffair(func(params ...interface{}) {
+func (service UserServiceImpl) AffairTest() (err error) {
+	return service.ExecuteOnAffair(func(params ...interface{}) {
 		len := len(params)
 		var db *gorm.DB
 		db = params[len-1].(*gorm.DB)

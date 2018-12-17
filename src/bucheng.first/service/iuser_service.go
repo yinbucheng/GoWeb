@@ -8,5 +8,5 @@ import (
 type IUserService interface {
 	base.BaseService
 	FindAll() []user.User
-	AffairTest()
+	AffairTest() (err error)
 }

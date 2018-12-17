@@ -7,5 +7,5 @@ type BaseService interface {
 	FindOne(id int, bean interface{})
 	ListAll(bean interface{})
 	//开启事务执行此方法
-	ExecuteOnAffair(method func(params ...interface{}), param ...interface{})
+	ExecuteOnAffair(method func(params ...interface{}), param ...interface{}) (err error)
 }
