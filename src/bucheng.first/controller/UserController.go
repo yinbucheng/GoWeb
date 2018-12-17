@@ -22,6 +22,7 @@ func InitController(engine *gin.Engine) {
 	engine.POST("/user/listAll", userController.listAll)
 	engine.GET("/user/findOne", userController.findOne)
 	engine.POST("/user/update", userController.updateUser)
+	engine.POST("/user/findAll", userController.findAll)
 }
 
 func (userController UserController) saveUser(c *gin.Context) {
@@ -75,4 +76,9 @@ func (userController UserController) updateUser(c *gin.Context) {
 	} else {
 		base.Fail("更新失败", c)
 	}
+}
+
+func (controller UserController) findAll(c *gin.Context) {
+	users := controller.userService.FindAll()
+	base.SuccessWithData(users, c)
 }

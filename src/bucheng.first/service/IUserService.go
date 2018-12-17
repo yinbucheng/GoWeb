@@ -1,7 +1,11 @@
 package service
 
-import "bucheng.first/base"
+import (
+	"bucheng.first/base"
+	"os/user"
+)
 
 type IUserService interface {
 	base.BaseService
+	FindAll() []user.User
 }
