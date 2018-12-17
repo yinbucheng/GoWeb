@@ -11,7 +11,7 @@ import (
 
 func main() {
 	var db *gorm.DB
-	db = utils.InitDb("root", "introcks1234", "go_test")
+	db = utils.InitDb("root", "123456", "go_test")
 	entity.CreateTable(db, entity.User{})
 	entity.CreateTable(db, entity.Room{})
 	fmt.Println("================初始化表完成====================")
